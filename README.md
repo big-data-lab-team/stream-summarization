@@ -15,7 +15,7 @@ Then please cp the file **uthash.h** into our code folder.
 
 ## Compilation
 
-#GCC compiler
+# GCC compiler
 
 compiling with GCC：
 ``` c
@@ -26,7 +26,8 @@ Geting result:
 ./result
 ```
 
-#Makefile
+# Makefile
+
 We support a makefile also can help you compiling our code simplly.
 make sure **uthash.h** is in the folder.
 
