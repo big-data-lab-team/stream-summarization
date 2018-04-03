@@ -40,9 +40,29 @@ $ make clean
 ```
 
 ## Execution Example
-todo 
 
+1. Download our code with git:
+``` bash
+$ git clone https://github.com/tom147465/stream-summarization.git
+```
 
+2. Download uthash with git:
+```bash
+$ git clone https://github.com/troydhanson/uthash.git
+```
 
+3. Copy **uthash.h** to our folder:
+```bash
+$ cp uthash/src/uthash.h .
+```
 
+4. Compile code with Makefile:
+``` bash
+$ make
+```
+
+5. remove compiling file after runing code:
+``` bash
+$ make clean
+```
 
