@@ -1,4 +1,4 @@
-# Cardinality Calculation over Sliding window
+## Cardinality Calculation over Sliding window
 
 This is a simply implement for counting distinct element in sliding window
 Storing data which are within window in a double Linked List, and Hashing this data into a hash table in order to save the times it appears.
@@ -15,9 +15,9 @@ Then please cp the file **uthash.h** into our code folder.
 
 ## Compilation
 
-### GCC compiler
+#GCC compiler
 
-compiling with GCCï¼š
+compiling with GCC£º
 ``` c
 gcc DbLinkList.c main.c -o result -I. -lm
 ```
@@ -26,8 +26,7 @@ Geting result:
 ./result
 ```
 
-### Makefile
-
+#Makefile
 We support a makefile also can help you compiling our code simplly.
 make sure **uthash.h** is in the folder.
 
