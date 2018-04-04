@@ -1,4 +1,6 @@
-# Cardinality Calculation over Sliding window
+# Cardinality Calculation over Sliding Window
+
+[![Build Status](https://travis-ci.org/big-data-lab-team/stream-summarization.svg?branch=master)](https://travis-ci.org/big-data-lab-team/stream-summarization)
 
 This is a simple implementation for counting distinct element in sliding windows.
 It stores data in the window as a double-kinked list,
