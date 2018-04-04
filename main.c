@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <string.h>
 #include "DbLinkList.h"
 #include "uthash.h"
 #define HEAD_LENGTH 3
@@ -42,14 +43,12 @@ int main()
         if(1==(int)head[0]){
             // read time stamp and 4 quatation
             fread(timestamp, 4, 1, pf);
-            fread(quat, 2,4,pf);
-            for(i=0;i<sizeof(quat);i++){
+            fread(quat, sizeof(short),4,pf);
+            for(i=0;i< 4;i++){
                 quat[i] = (short)(round(quat[i]/1000));
-                //printf("...........%hi.......\n", quat[i]);
             }
-
             // create new Data struct from time stamp and quaternion
-            data = newDataStruct((unsigned int)timestamp, quat);
+            data = newDataStruct(timestamp[0], quat);
             // assign new space and create new node by using data
             node = newNode(data);
             // add this new node into DbLinkedList
