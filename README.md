@@ -1,68 +1,43 @@
 # Cardinality Calculation over Sliding window
 
-This is a simply implement for counting distinct element in sliding window
-Storing data which are within window in a double Linked List, and Hashing this data into a hash table in order to save the times it appears.
+This is a simple implementation for counting distinct element in sliding windows.
+It stores data in the window as a double-kinked list,
+and it uses a hash table to look it up in constant time. We use
+[uthash](https://troydhanson.github.io/uthash)
+to implement the hash table.
 
-For hash table, we use **uthash**, where you could find it in <https://troydhanson.github.io/uthash/>
+## Installation
 
-## dependencies
-As we said, our code need **uthash**. If you do not have, please download in <https://troydhanson.github.io/uthash/>
-or use git by 
+1. Clone the project:
+``` bash
+$ git clone https://github.com/big-data-lab-team/stream-summarization.git
+```
+
+2. Change directory
+``` bash
+$ cd stream-summarization
+```
+
+3. Clone utash: 
 ```git
 git clone https://github.com/troydhanson/uthash.git
 ```
-Then please cp the file **uthash.h** into our code folder.
 
-## Compilation
-
-### GCC compiler
-
-compiling with GCC£º
-``` c
-gcc DbLinkList.c main.c -o result -I. -lm
-```
-Geting result:
-``` c
-./result
-```
-
-### Makefile
-We support a makefile also can help you compiling our code simplly.
-make sure **uthash.h** is in the folder.
-
-Do compile and  output result:
-``` bash
-$ make
-```
-remove file created by compiler:
-``` bash
-$ make clean
-```
-
-## Execution Example
-
-1. Download our code with git:
-``` bash
-$ git clone https://github.com/tom147465/stream-summarization.git
-```
-
-2. Download uthash with git:
-```bash
-$ git clone https://github.com/troydhanson/uthash.git
-```
-
-3. Copy **uthash.h** to our folder:
+4. cp **uthash.h** to the project folder:
 ```bash
 $ cp uthash/src/uthash.h .
 ```
 
-4. Compile code with Makefile:
+5. Compile the project 
 ``` bash
 $ make
 ```
 
-5. remove compiling file after runing code:
+## Execution Example
+
+Just run `cardinality`:
 ``` bash
-$ make clean
+./cardinallity
 ```
+
 
