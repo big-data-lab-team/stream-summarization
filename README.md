@@ -18,12 +18,12 @@ $ git clone https://github.com/big-data-lab-team/stream-summarization.git
 $ cd stream-summarization
 ```
 
-3. Clone utash: 
+3. Clone utash
 ```git
 git clone https://github.com/troydhanson/uthash.git
 ```
 
-4. cp **uthash.h** to the project folder:
+4. Copy `uthash.h` to the project folder
 ```bash
 $ cp uthash/src/uthash.h .
 ```
@@ -35,7 +35,7 @@ $ make
 
 ## Execution Example
 
-Just run `cardinality`:
+Run `cardinality`
 ``` bash
 ./cardinallity
 ```
