@@ -4,4 +4,5 @@ script:
   - git clone https://github.com/troydhanson/uthash.git
   - cp uthash/src/uthash.h .
   - make
-  - ./cardinality 
+  - ./cardinality
+  - ./estimation
