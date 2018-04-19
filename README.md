@@ -8,6 +8,10 @@ and it uses a hash table to look it up in constant time. We use
 [uthash](https://troydhanson.github.io/uthash)
 to implement the hash table.
 
+Additionally, LRU-LC which is a Estimation algorithm is include in `LRU-LC.c` and `LRU-LC.h` files. 
+Detail of this algorithm, please read [LRU-LC: Fast Estimating Cardinality of Flows over Sliding Windows](https://www.jstage.jst.go.jp/article/transinf/E99.D/10/E99.D_2015EDL8263/_pdf)
+
+
 ## Installation
 
 1. Clone the project:
@@ -41,5 +45,8 @@ Run `cardinality`
 ``` bash
 ./cardinallity
 ```
-
+Run `estimation` for run the LRU-LC estimation algorithm
+``` bash
+./estimation
+```
 
