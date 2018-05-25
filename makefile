@@ -1,4 +1,4 @@
-HEADERS = DistinctElement/DoubleLinkedList/DbLinkList.h uthash.h
+HEADERS = DistinctElement/DoubleLinkedList/DbLinkList.h DistinctElement/DoubleLinkedList/uthash.h
 
 default: cardinality estimation
 
