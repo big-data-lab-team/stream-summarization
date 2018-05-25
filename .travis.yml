@@ -2,7 +2,7 @@ language: c
 sudo: enabled
 script: 
   - git clone https://github.com/troydhanson/uthash.git
-  - cp uthash/src/uthash.h .
+  - cp uthash/src/uthash.h ./DistinctElement/DoubleLinkedList/
   - make
   - ./cardinality
   - ./estimation
