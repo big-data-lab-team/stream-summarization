@@ -1,9 +1,9 @@
 HEADERS = DistinctElement/DoubleLinkedList/DbLinkList.h DistinctElement/DoubleLinkedList/uthash.h
 
-default: cardinality estimation
+default: cardinality estimation ltc-method
 
 cardinality.o: DistinctElement/DoubleLinkedList/DbLinkList.c  $(HEADERS)
-	gcc -c DbLinkList.c -o cardinality.o
+	gcc -c DistinctElement/DoubleLinkedList/DbLinkList.c -o cardinality.o
 
 main.o: DistinctElement/DoubleLinkedList/main.c $(HEADERS)
 	gcc -c DistinctElement/DoubleLinkedList/main.c -o main.o 
@@ -12,7 +12,7 @@ cardinality: cardinality.o main.o
 	gcc cardinality.o main.o -lm -o cardinality 
 
 estimation: DistinctElement/LRU_LC/LRU_LC.c DistinctElement/LRU_LC/LRU_LC.h
-	gcc LRU_LC.c -lm -o estimation
+	gcc DistinctElement/LRU_LC/LRU_LC.c -lm -o estimation
 	
 ltc-method: DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/LTC.h
 	gcc DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/main.c -lm -o LTC-method
