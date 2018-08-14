@@ -14,6 +14,10 @@ Detail of this algorithm, please read [LRU-LC: Fast Estimating Cardinality of Fl
 3. `LTC` in `DataStreamCompression\LTC` is a simple implementation for Compress data by using Lightweight Temporal Compression(LTC) method.
 More detail, please read [Lightweight Temporal Compression of Microclimate Datasets](https://escholarship.org/uc/item/6zg2n1rh)
 
+4. `LTC-Manhattan` in `DataStreamCompression\LTC-Manhattan` is a method for Multi-parameters dataset. It is extention of `LTC` to compress dataset with Manhatten distance(between data).
+
+5. Working on --- `LTC-Euclidean` in `DataStreamCompression\LTC-Euclidean` is written for compressing Multi-parameters dataset which parameters are Interrelated. 
+
 ## Installation
 
 1. Clone the project:
@@ -54,5 +58,9 @@ Run `estimation` for running the LRU-LC estimation algorithm
 Run `LTC` for running LTC data compression algorithm
 ```bash
 ./LTC-method
+```
+Run `LTC-Man` for running LTC-Manhattan compression algorithm by typing `./LTC-man {csv files with splliter ','}` there is a example
+```bash
+./LTC-man data.csv
 ```
 
