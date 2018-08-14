@@ -146,8 +146,8 @@ int main(int argc, char *argv[])
         {
 
             printf( "%u", base_data->timestamp);
-            for(int i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-                printf(",%f", base_data->params[i]);
+            for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+                printf(",%f", base_data->params[param_index]);
             printf("\n");
 
             updateBasePoint(bound_box, coming_data, base_data);
@@ -158,13 +158,13 @@ int main(int argc, char *argv[])
     }
 
     printf( "%u", base_data->timestamp);
-    for(int i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        printf(",%f", base_data->params[i]);
+    for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+        printf(",%f", base_data->params[param_index]);
     printf("\n");
 
     printf( "%u", coming_data->timestamp);
-    for(int i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        printf(",%f", (bound_box->bounds[i][0] + bound_box->bounds[i][1])/2);
+    for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+        printf(",%f", (bound_box->bounds[param_index][0] + bound_box->bounds[param_index][1])/2);
     printf("\n");
 
     fclose(f_csv);
