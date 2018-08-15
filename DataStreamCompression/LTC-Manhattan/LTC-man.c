@@ -116,7 +116,6 @@ int main(int argc, char *argv[])
     while(fgets(strLine, MAX_lINE_BYTE_SIZE, f_csv))
     {
         time_counter += 1;
-
         /* read timestamp */
         if((tmp_segment = strtok(strLine, ",")) != NULL)
         {
@@ -144,9 +143,7 @@ int main(int argc, char *argv[])
 
         if(isTransmitData(bound_box, coming_data, base_data))
         {
-
-            printf( "%u", base_data->timestamp);
-            for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+            for(printf( "%u", base_data->timestamp), param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
                 printf(",%f", base_data->params[param_index]);
             printf("\n");
 
@@ -157,13 +154,13 @@ int main(int argc, char *argv[])
         updateBoundBox(bound_box, coming_data, base_data);
     }
 
-    printf( "%u", base_data->timestamp);
-    for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+    
+    for(printf("%u", base_data->timestamp), param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
         printf(",%f", base_data->params[param_index]);
     printf("\n");
 
-    printf( "%u", coming_data->timestamp);
-    for(param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
+    
+    for(printf("%u", coming_data->timestamp), param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
         printf(",%f", (bound_box->bounds[param_index][0] + bound_box->bounds[param_index][1])/2);
     printf("\n");
 
