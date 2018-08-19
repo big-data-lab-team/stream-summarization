@@ -1,22 +1,19 @@
 #include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
 
-#include "circles_intersect.h"
+#include "ltc-eu.h"
 
 #define EPSILON 100
 #define TIMEUNIT_DIFFERENT 1
 
-//#include "local-mohamand-3d.c"
 #include "local-data-2d.c"
+//#include "local-data-3d.c"
+//#include "local-mohamand-3d.c"
+//#include "local-mohamand-2d.c"
 
 struct DATA_POINT base_data;
 struct DATA_POINT coming_data;
 struct CIRCLE corresponse_circle;
 struct LIST_CIRCLE all_circles = {NULL, 0};
-
-
 
 void updateBasePoint()
 {
@@ -45,17 +42,19 @@ void transmitData() {
     int i;
     for (printf("%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         printf(",%f", base_data.data.coordinate[i]);
-	printf("\n");
+    printf("\n");
 }
 
 int main()
 {
-    int i, number=0;
-    for(i=0; i< 613; i++)
+    FILE * f_out = fopen("tmp.csv", "w");
+    int data_index, i;
+    for(data_index=0; data_index< data_list_length; data_index++)
     {
-        coming_data = data_list[i];
+        coming_data = data_list[data_index];
         /* do initial when first and second data coming */
-        if(i==0)
+
+        if(data_index==0)
         {
             base_data = coming_data;
             continue;
@@ -63,9 +62,12 @@ int main()
 
         updateCorCircle();
 
-        if(!isThereIntersection(all_circles, corresponse_circle))
+        if(!isThereIntersection(&all_circles, corresponse_circle))
         {
-            transmitData();
+            //transmitData();
+            for (fprintf(f_out, "%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
+                fprintf(f_out, ",%f", base_data.data.coordinate[i]);
+            fprintf(f_out, "\n");
 
             // update basePoint
             updateBasePoint();
@@ -76,21 +78,26 @@ int main()
             updateCorCircle();
             addCircleIntoList(&all_circles, corresponse_circle);
             centre_point = corresponse_circle.centre;
-            number+=1;
         }
-        else
-            addCircleIntoList(&all_circles, corresponse_circle);
+        else{
+            reInitialList(&all_circles);
+            all_circles.length = tmp_list_circles.length;
+            all_circles.circles = (struct CIRCLE *)malloc(sizeof(struct CIRCLE) * tmp_list_circles.length);
+            for (i = 0;  i< tmp_list_circles.length; i++) {
+                all_circles.circles[i] = tmp_list_circles.circles[i];
+            }
+        }
     }
 
-    transmitData();
+    //transmitData();
+    for (fprintf(f_out, "%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
+        fprintf(f_out, ",%f", base_data.data.coordinate[i]);
+    fprintf(f_out, "\n");
 
     double ln = coming_data.timestamp - base_data.timestamp;
-    for (printf("%u", coming_data.timestamp), i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        printf(",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln)
-	printf("\n");
-
-//    fclose(f_csv);
-//    fclose(f_out);
+    for (fprintf(f_out, "%u", coming_data.timestamp), i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
+        fprintf(f_out, ",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln);
+	fprintf(f_out, "\n");
 }
 
 
