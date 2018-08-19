@@ -18,7 +18,7 @@ ltc-method: DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/LTC.h
 	gcc DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/main.c -lm -o LTC-method
 
 ltc-man: 
-	gcc DataStreamCompression/LTC-Manhattan/LTC-man.c -o LTC-man
+	gcc DataStreamCompression/LTC-Manhattan/ltc-man.c -o LTC-man
 	
 clean:
 	-rm -f cardinality.o
