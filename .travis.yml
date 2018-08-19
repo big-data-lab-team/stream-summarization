@@ -7,3 +7,6 @@ script:
   - ./cardinality
   - ./estimation
   - ./LTC-method
+  - ./LTC-man
+  - ./LTC-eu
+  - make clean
