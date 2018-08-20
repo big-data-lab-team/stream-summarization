@@ -15,8 +15,10 @@ Detail of this algorithm, please read [LRU-LC: Fast Estimating Cardinality of Fl
 More detail, please read [Lightweight Temporal Compression of Microclimate Datasets](https://escholarship.org/uc/item/6zg2n1rh)
 
 4. `LTC-Manhattan` in `DataStreamCompression\LTC-Manhattan` is a method for Multi-parameters dataset. It is extention of `LTC` to compress dataset with Manhatten distance(between data).
+	We provide 4 data files in C language, each one is a array. You can change dataset and modify DIMENSION_WITHOUT_TIMESTAMP into correct value in C file before compiling it.
 
-5. Working on --- `LTC-Euclidean` in `DataStreamCompression\LTC-Euclidean` is written for compressing Multi-parameters dataset which parameters are Interrelated. 
+5. `LTC-Euclidean` in `DataStreamCompression\LTC-Euclidean` is written for compressing Multi-parameters dataset which parameters are Interrelated. It uses same idea with LTC, but find distance
+	between 2 data using Euclidean distance. We provide 4 data files in C language, each of them is a array. You can change dataset and modify DIMENSION_WITHOUT_TIMESTAMP into correct value in C file before compiling it.
 
 ## Installation
 
@@ -59,8 +61,11 @@ Run `LTC` for running LTC data compression algorithm
 ```bash
 ./LTC-method
 ```
-Run `LTC-Man` for running LTC-Manhattan compression algorithm by typing `./LTC-man {csv files with splliter ','}` there is a example
+Run `LTC-man` for running LTC-Manhattan compression algorithm
 ```bash
-./LTC-man data.csv
+./LTC-man
 ```
-
+Run `LTC-eu` for running LTC-Euclidean compression method
+```bash
+./LTC-eu
+```
