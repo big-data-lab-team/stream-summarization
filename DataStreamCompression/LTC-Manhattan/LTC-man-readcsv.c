@@ -161,7 +161,7 @@ int main(int argc, char *argv[])
 
     
     for(printf("%u", coming_data->timestamp), param_index=0; param_index<DIMENSION_WITHOUT_TIMESTAMP; param_index++)
-        printf(",%f", (bound_box->bounds[param_index][0] + bound_box->bounds[param_index][1])/2);
+        printf(",%f", base_data->params[param_index] + (coming_data->timestamp - base_data->timestamp)*(base_data->params[param_index] - (bound_box->bounds[param_index][0] + bound_box->bounds[param_index][1])/2));
     printf("\n");
 
     fclose(f_csv);
