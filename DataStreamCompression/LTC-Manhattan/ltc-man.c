@@ -137,7 +137,8 @@ int main()
     fprintf(f_out, "\n");
     
     for(fprintf(f_out, "%u", coming_data->timestamp), i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        fprintf(f_out, ",%f", (bound_box->bounds[i][0] + bound_box->bounds[i][1])/2);
+        //fprintf(f_out, ",%f", (bound_box->bounds[i][0] + bound_box->bounds[i][1])/2);
+        fprintf(f_out, ",%f", base_data->params[param_index] + (coming_data->timestamp - base_data->timestamp)*(base_data->params[param_index] - (bound_box->bounds[param_index][0] + bound_box->bounds[param_index][1])/2));
     fprintf(f_out, "\n");
 
     free(coming_data);
