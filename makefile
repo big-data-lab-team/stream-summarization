@@ -1,21 +1,33 @@
-HEADERS = DbLinkList.h uthash.h
+HEADERS = DistinctElement/DoubleLinkedList/DbLinkList.h DistinctElement/DoubleLinkedList/uthash.h
 
-default: cardinality estimation
+default: cardinality estimation ltc-method ltc-man ltc-eu
 
-cardinality.o: DbLinkList.c  $(HEADERS)
-	gcc -c DbLinkList.c -o cardinality.o
+cardinality.o: DistinctElement/DoubleLinkedList/DbLinkList.c  $(HEADERS)
+	gcc -c DistinctElement/DoubleLinkedList/DbLinkList.c -o cardinality.o
 
-main.o: main.c $(HEADERS)
-	gcc -c main.c -o main.o 
+main.o: DistinctElement/DoubleLinkedList/main.c $(HEADERS)
+	gcc -c DistinctElement/DoubleLinkedList/main.c -o main.o 
 
 cardinality: cardinality.o main.o
 	gcc cardinality.o main.o -lm -o cardinality 
 
-estimation: LRU_LC.c LRU_LC.h
-	gcc LRU_LC.c -I. -lm -o estimation
+estimation: DistinctElement/LRU_LC/LRU_LC.c DistinctElement/LRU_LC/LRU_LC.h
+	gcc DistinctElement/LRU_LC/LRU_LC.c -lm -o estimation
 	
+ltc-method: DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/LTC.h
+	gcc DataStreamCompression/LTC/LTC.c DataStreamCompression/LTC/main.c -lm -o LTC-method
+
+ltc-man: 
+	gcc DataStreamCompression/LTC-Manhattan/ltc-man.c -o LTC-man
+	
+ltc-eu:
+	gcc DataStreamCompression/LTC-Manhattan/ltc-man.c -lm -o LTC-eu
+
 clean:
 	-rm -f cardinality.o
 	-rm -f main.o
 	-rm -f cardinality
 	-rm -f estimation
+	-rm -f LTC-method
+	-rm -f LTC-man
+	-rm -f LTC-eu
