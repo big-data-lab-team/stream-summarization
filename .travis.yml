@@ -1,6 +1,6 @@
 language: c
 sudo: enabled
-script: 
+script:
   - git clone https://github.com/troydhanson/uthash.git
   - cp uthash/src/uthash.h ./DistinctElement/DoubleLinkedList/
   - make
@@ -9,4 +9,7 @@ script:
   - ./LTC-method
   - ./LTC-man
   - ./LTC-eu
+  - ./Ex1-infinity
+  - ./Ex1-euclidean
+  - ./Ex2
   - make clean
