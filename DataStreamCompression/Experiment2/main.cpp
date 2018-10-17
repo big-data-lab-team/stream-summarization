@@ -15,11 +15,11 @@ typedef struct{
 int main() {
     CompressionEngine *compressionEngine = nullptr;
 
-    ManhattanCompression manhattanCompression;
+    InfinityCompression infinityCompression;
 //    EuclideanCompression euclideanCompression;
 
     CompressionEngineConfig_t vCfg = {(100/2048.f), (uint16_t)16};
-    compressionEngine = &manhattanCompression;
+    compressionEngine = &infinityCompression;
 //    compressionEngine = &euclideanCompression;
 
     compressionEngine->init(vCfg);

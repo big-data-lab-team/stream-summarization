@@ -62,7 +62,7 @@ public:
 
 
 
-class ManhattanCompression:public CompressionEngine
+class InfinityCompression:public CompressionEngine
 {
 
 private:
@@ -79,7 +79,7 @@ public:
 
     void calculateOutput();
 
-    ManhattanCompression()
+    InfinityCompression()
     {
         pre_timestamp = 0;
         count = 0;

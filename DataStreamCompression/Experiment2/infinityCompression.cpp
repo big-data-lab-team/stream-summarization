@@ -3,7 +3,7 @@
 #include "compressionEngine.h"
 
 
-bool ManhattanCompression::isIntersect()
+bool InfinityCompression::isIntersect()
 {
     float time_differ = (float)count - 1;
 
@@ -16,14 +16,14 @@ bool ManhattanCompression::isIntersect()
     }
     return true;
 }
-void ManhattanCompression::calculateOutput()
+void InfinityCompression::calculateOutput()
 {
     output.timestamp = base_data.timestamp;
     output.dataX = base_data.params[0] * (32768/vCfg.range);
     output.dataY = base_data.params[1] * (32768/vCfg.range);
     output.dataZ = base_data.params[2] * (32768/vCfg.range);
 }
-bool ManhattanCompression::getCompressedData(uint32_t timestamp, int16_t x, int16_t y, int16_t z)
+bool InfinityCompression::getCompressedData(uint32_t timestamp, int16_t x, int16_t y, int16_t z)
 {
     count++;
     {
@@ -108,7 +108,7 @@ bool ManhattanCompression::getCompressedData(uint32_t timestamp, int16_t x, int1
 
     return false;
 }
-void ManhattanCompression::reset()
+void InfinityCompression::reset()
 {
     if(count==0)
     {
