@@ -1,4 +1,4 @@
-language: c
+language: cpp
 sudo: enabled
 script:
   - git clone https://github.com/troydhanson/uthash.git
