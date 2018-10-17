@@ -28,7 +28,7 @@ Experiment-1:
 	gcc DataStreamCompression/Experiment1/Euclidean-norm.c -lm -o Ex1-euclidean
 
 Experiment-2:
-	gcc DataStreamCompression/Experiment2/main.cpp -lm -o Ex2
+	g++ DataStreamCompression/Experiment2/main.cpp -o Ex2
 
 clean:
 	-rm -f cardinality.o

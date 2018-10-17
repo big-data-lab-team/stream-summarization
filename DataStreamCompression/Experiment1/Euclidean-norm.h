@@ -1,7 +1,4 @@
 
-#ifndef RUN_LTC_EU_H
-#define RUN_LTC_EU_H
-
 //#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
@@ -183,6 +180,3 @@ int isThereIntersection(struct LIST_CIRCLE* list_circle, struct CIRCLE new_circl
         return 0;
     }
 }
-
-
-#endif //RUN_LTC_EU_H
