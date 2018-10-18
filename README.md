@@ -66,7 +66,7 @@ Compile the method
 ```
 $ make ltc-infinity
 ```
-Run LTC with Infinity norm, the output file is `compressed.csv`.
+Run LTC with Infinity norm, the output file is `compressed-infinity.csv`.
 ```
 ./ltc-infinity
 ```
@@ -102,7 +102,7 @@ Compile the method
 ```
 $ make ltc-euclidean
 ```
-Run LTC with Euclidean norm, the output file is `compressed.csv`.
+Run LTC with Euclidean norm, the output file is `compressed-euclidean.csv`.
 ```
 ./ltc-euclidean
 ```

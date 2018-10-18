@@ -4,6 +4,5 @@ script:
   - make
   - ./ltc-original
   - ./ltc-infinity
-  - gcc Experiment1/Euclidean-norm.c -lm -o ltc-euclidean
   - ./ltc-euclidean
   - make clean

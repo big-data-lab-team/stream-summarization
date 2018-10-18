@@ -41,7 +41,7 @@ void updateCorCircle()
 
 int main()
 {
-    FILE * f_out = fopen("compressed.csv", "w");
+    FILE * f_out = fopen("compressed-euclidean.csv", "w");
     int data_index, i;
     for(data_index=0; data_index< data_list_length; data_index++)
     {

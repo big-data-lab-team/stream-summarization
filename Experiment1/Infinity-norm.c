@@ -95,7 +95,7 @@ int isTransmitData(const struct BOUND_BOX *_bound_box, const struct DATA_POINT *
 
 int main()
 {
-    FILE* f_out = fopen("compressed.csv", "w");
+    FILE* f_out = fopen("compressed-infinity.csv", "w");
     struct DATA_POINT *coming_data = (struct DATA_POINT *)malloc(sizeof(struct DATA_POINT));
     struct DATA_POINT *base_data = NULL;
     struct BOUND_BOX *bound_box = NULL;
