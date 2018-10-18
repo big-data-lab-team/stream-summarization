@@ -28,6 +28,7 @@ void updateBasePoint()
 
 void updateCorCircle()
 {
+    printf("%s\n", "updateCorCircle");
     double ln = coming_data.timestamp - base_data.timestamp;
     int i;
     for(i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
@@ -41,6 +42,7 @@ void updateCorCircle()
 int main()
 {
     FILE * f_out = fopen("compressed-euclidean.csv", "w");
+    printf("%s\n", "after open FILE");
     int data_index, i;
     for(data_index=0; data_index< data_list_length; data_index++)
     {
@@ -73,7 +75,7 @@ int main()
             centre_point = corresponse_circle.centre;
         }
         else{
-            reInitialList(&all_circles);
+            reInitialList(&all_ccirclesirclcircleses);
             all_circles.length = tmp_list_circles.length;
             all_circles.circles = (struct CIRCLE *)malloc(sizeof(struct CIRCLE) * tmp_list_circles.length);
             for (i = 0;  i< tmp_list_circles.length; i++) {
@@ -91,4 +93,6 @@ int main()
         fprintf(f_out, ",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln);
 	  fprintf(f_out, "\n");
 
+    free(all_circles.circles);
+    free(tmp_list_circles.circles);
 }
