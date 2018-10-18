@@ -6,10 +6,10 @@
 #define EPSILON (100)
 #define TIMEUNIT_DIFFERENT 1
 
-//#include "local-data-2d.c"
-#include "local-data-3d.c"
-//#include "local-mohamand-2d.c"
-//#include "local-mohamand-3d.c"
+#include "short-bicep-curl-2d.c"
+// #include "short-bicep-curl-3d.c"
+// #include "long-bicep-curl-2d.c"
+// #include "long-bicep-curl-3d.c"
 
 struct DATA_POINT base_data;
 struct DATA_POINT coming_data;
@@ -41,7 +41,7 @@ void updateCorCircle()
 
 int main()
 {
-    FILE * f_out = fopen("tmp.csv", "w");
+    FILE * f_out = fopen("compressed.csv", "w");
     int data_index, i;
     for(data_index=0; data_index< data_list_length; data_index++)
     {

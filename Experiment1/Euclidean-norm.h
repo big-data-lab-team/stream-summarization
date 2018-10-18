@@ -5,7 +5,7 @@
 
 #define MAX(x,y) (x)>=(y)?(x):(y);
 #define MIN(x,y) (x)<=(y)?(x):(y);
-#define DIMENSION_WITHOUT_TIMESTAMP 3
+#define DIMENSION_WITHOUT_TIMESTAMP 2
 
 #define OUTSIDE 0
 #define INTERSECT 1

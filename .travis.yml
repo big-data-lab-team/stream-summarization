@@ -1,15 +1,8 @@
-language: cpp
+language: c
 sudo: enabled
 script:
-  - git clone https://github.com/troydhanson/uthash.git
-  - cp uthash/src/uthash.h ./DistinctElement/DoubleLinkedList/
   - make
-  - ./cardinality
-  - ./estimation
-  - ./LTC-method
-  - ./LTC-man
-  - ./LTC-eu
-  - ./Ex1-infinity
-  - ./Ex1-euclidean
-  - ./Ex2
+  - ./ltc-original
+  - ./ltc-infinity
+  - ./ltc-euclidean
   - make clean
