@@ -91,6 +91,6 @@ int main()
         fprintf(f_out, ",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln);
 	  fprintf(f_out, "\n");
 
-//    free(all_circles.circles);
-//    free(tmp_list_circles.circles);
+    free(all_circles.circles);
+    free(tmp_list_circles.circles);
 }
