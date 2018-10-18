@@ -1,11 +1,5 @@
-//
-// Created by boli on 8/17/18.
-//
 
-#ifndef RUN_LTC_EU_H
-#define RUN_LTC_EU_H
-
-#include <stdio.h>
+//#include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 
@@ -73,7 +67,6 @@ int relationOf2Circles(struct CIRCLE pre_circle, struct CIRCLE new_circle)
         return INTERSECT;
     else return INSIDE;
 }
-
 
 // !at first, make sure that circle do not inside of every circle in the list_circle.
 // !It means circle have intersection with anyone circle in the list_circle
@@ -187,6 +180,3 @@ int isThereIntersection(struct LIST_CIRCLE* list_circle, struct CIRCLE new_circl
         return 0;
     }
 }
-
-
-#endif //RUN_LTC_EU_H

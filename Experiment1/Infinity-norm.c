@@ -2,8 +2,8 @@
 #include <stdlib.h> //malloc
 #include <math.h> // sqrt()
 
-#define DIMENSION_WITHOUT_TIMESTAMP 3
-#define EPSILON 100
+#define DIMENSION_WITHOUT_TIMESTAMP 2
+#define EPSILON (100)
 #define TIME_UNIT_DIFFERENCE 1
 
 #define MAX(x,y) (x)>=(y)?(x):(y);
@@ -22,10 +22,10 @@ struct BOUND_BOX {
     double bounds[DIMENSION_WITHOUT_TIMESTAMP][2];
 };
 
-//#include "local-data-2d.c"
-#include "local-data-3d.c"
-//#include "local-mohamand-2d.c"
-//#include "local-mohamand-3d.c"
+#include "short-bicep-curl-2d.c"
+// #include "short-bicep-curl-3d.c"
+// #include "long-bicep-curl-2d.c"
+// #include "long-bicep-curl-3d.c"
 
 void initialBoundBox(struct BOUND_BOX *_bound_box, const struct DATA_POINT *_coming_data)
 {
@@ -95,7 +95,7 @@ int isTransmitData(const struct BOUND_BOX *_bound_box, const struct DATA_POINT *
 
 int main()
 {
-    FILE* f_out = fopen("tmp.csv", "w");
+    FILE* f_out = fopen("compressed-infinity.csv", "w");
     struct DATA_POINT *coming_data = (struct DATA_POINT *)malloc(sizeof(struct DATA_POINT));
     struct DATA_POINT *base_data = NULL;
     struct BOUND_BOX *bound_box = NULL;
@@ -124,20 +124,19 @@ int main()
             for(fprintf(f_out, "%u", base_data->timestamp), i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
                 fprintf(f_out, ",%f", base_data->params[i]);
             fprintf(f_out, "\n");
-            
+
             updateBasePoint(bound_box, coming_data, base_data);
             initialBoundBox(bound_box, coming_data);
         }
 
         updateBoundBox(bound_box, coming_data, base_data);
     }
-    
+
     for(fprintf(f_out, "%u", base_data->timestamp), i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data->params[i]);
     fprintf(f_out, "\n");
-    
+
     for(fprintf(f_out, "%u", coming_data->timestamp), i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        //fprintf(f_out, ",%f", (bound_box->bounds[i][0] + bound_box->bounds[i][1])/2);
         fprintf(f_out, ",%f", base_data->params[i] + (coming_data->timestamp - base_data->timestamp)*((bound_box->bounds[i][0] + bound_box->bounds[i][1])/2 - base_data->params[i]));
     fprintf(f_out, "\n");
 

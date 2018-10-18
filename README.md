@@ -1,24 +1,16 @@
-# Cardinality Calculation over Sliding Window
+# Multi-dimensional extension of the Lightweight Temporal Compression method
 
 [![Build Status](https://travis-ci.org/big-data-lab-team/stream-summarization.svg?branch=master)](https://travis-ci.org/big-data-lab-team/stream-summarization)
 
-1. `DbLinkList` in `DistinctElement\DoubleLinkedList` is a simple implementation for counting distinct element in sliding windows.
-It stores data in the window as a double-kinked list,
-and it uses a hash table to look it up in constant time. We use
-[uthash](https://troydhanson.github.io/uthash)
-to implement the hash table.
+1. `LTC` is a simple implementation for Compress data by using Lightweight Temporal Compression(LTC) method.
+More detail, please read [Lightweight Temporal Compression of Microclimate Datasets](https://escholarship.org/uc/item/6zg2n1rh).
+You can find simple implementation in folder `LTC`
 
-2. `LRU-LC` which is a Estimation algorithm is include in  files. 
-Detail of this algorithm, please read [LRU-LC: Fast Estimating Cardinality of Flows over Sliding Windows](https://www.jstage.jst.go.jp/article/transinf/E99.D/10/E99.D_2015EDL8263/_pdf)
+4. `Infinity-norm.c` in folder `Experiment1` is a implementation of LTC with infinity norm. We provide 4 data files in C language, each one is a array. You can change dataset and modify 'DIMENSION_WITHOUT_TIMESTAMP' macro in C file with correct value before compiling it.
 
-3. `LTC` in `DataStreamCompression\LTC` is a simple implementation for Compress data by using Lightweight Temporal Compression(LTC) method.
-More detail, please read [Lightweight Temporal Compression of Microclimate Datasets](https://escholarship.org/uc/item/6zg2n1rh)
+5. `Euclidean-norm.c` and `Euclidean-norm.h` in folder `Experiment1` is written to realize LTC with Euclidean norm. dataset which parameters are Interrelated.
 
-4. `LTC-Manhattan` in `DataStreamCompression\LTC-Manhattan` is a method for Multi-parameters dataset. It is extention of `LTC` to compress dataset with Manhatten distance(between data).
-	We provide 4 data files in C language, each one is a array. You can change dataset and modify DIMENSION_WITHOUT_TIMESTAMP into correct value in C file before compiling it.
-
-5. `LTC-Euclidean` in `DataStreamCompression\LTC-Euclidean` is written for compressing Multi-parameters dataset which parameters are Interrelated. It uses same idea with LTC, but find distance
-	between 2 data using Euclidean distance. We provide 4 data files in C language, each of them is a array. You can change dataset and modify DIMENSION_WITHOUT_TIMESTAMP into correct value in C file before compiling it.
+We provide 4 data files in C language, each of them is a array. You can change dataset and modify `DIMENSION_WITHOUT_TIMESTAMP` macro into correct value in C file before compiling it.
 
 ## Installation
 
@@ -31,41 +23,100 @@ $ git clone https://github.com/big-data-lab-team/stream-summarization.git
 ``` bash
 $ cd stream-summarization
 ```
-
-3. Clone utash
-```git
-git clone https://github.com/troydhanson/uthash.git
-```
-
-4. Copy `uthash.h` to the project folder
-```bash
-$ cp uthash/src/uthash.h ./DistinctElement/DoubleLinkedList/
-```
-
-5. Compile the project 
+3. Compile the project
 ``` bash
 $ make
 ```
 
 ## Execution Example
 
-Run `cardinality`
-``` bash
-./cardinallity
-```
-Run `estimation` for running the LRU-LC estimation algorithm
-``` bash
-./estimation
-```
-Run `LTC` for running LTC data compression algorithm
+Run original `LTC` compression algorithm
 ```bash
-./LTC-method
+./ltc-original
 ```
-Run `LTC-man` for running LTC-Manhattan compression algorithm
-```bash
-./LTC-man
+Run `LTC` with `Infinity norm`
+``` bash`
+./ltc-infinity
 ```
-Run `LTC-eu` for running LTC-Euclidean compression method
-```bash
-./LTC-eu
+Run `LTC` with `Euclidean norm`
+``` bash`
+./ltc-euclidean
+```
+
+## Measure Example
+This capture shows how to measure Compression Ratio and Max Error, that are mentioned in [A multi-dimensional extension of the LTC method](https://github.com/big-data-lab-team/paper-multidimensional-ltc.git).
+
+This example uses `short-bicep-curl-2d` data Set.
+
+#### LTC with Infinity norm
+Select data set `short-bicep-curl-2d.c`, add in `Infinity-norm.c`
+```
+#include short-bicep-curl-2d.c
+```
+Change `DIMENSION_WITHOUT_TIMESTAMP` macro to `2` in `Infinity-norm.c`, because we are using 2-dimensional data set.
+```
+#define DIMENSION_WITHOUT_TIMESTAMP 2
+```
+Change `EPSILON` macro to the value you want in `Infinity-norm.c`.
+In this example we set `EPSILON = 100`
+```
+#define EPSILON 100
+```
+Compile the method
+```
+$ make ltc-infinity
+```
+Run LTC with Infinity norm, the output file is `compressed-infinity.csv`.
+```
+./ltc-infinity
+```
+Decode compressed data
+```
+Connect two adjacent points with a straight line,
+and get data point from lines according their timestamp.
+```
+Compute Compression Ratio (CR)
+```
+CR = 1 - (# compressed data point) / (# total data point)
+```
+Compute Max Error. For each original data point (x,y) and reconstructed data point (m,n)
+```
+Error = Max(|x-m|,|y-n|)
+Max_Error = maximum `Error` in data set.
+```
+#### LTC with Euclidean norm
+Select data set `short-bicep-curl-2d.c`, add in `Euclidean-norm.c`
+```
+#include short-bicep-curl-2d.c
+```
+Change `DIMENSION_WITHOUT_TIMESTAMP` macro to `2` in `Euclidean-norm.h`, because we are using 2-dimensional data set.
+```
+#define DIMENSION_WITHOUT_TIMESTAMP 2
+```
+Change `EPSILON` macro to the value you want in `Euclidean-norm.c`.
+In this example we set `EPSILON = 100`
+```
+#define EPSILON 100
+```
+Compile the method
+```
+$ make ltc-euclidean
+```
+Run LTC with Euclidean norm, the output file is `compressed-euclidean.csv`.
+```
+./ltc-euclidean
+```
+Decode compressed data
+```
+Connect two adjacent points with a straight line,
+and get data point from lines according their timestamp.
+```
+Compute Compression Ratio (CR)
+```
+CR = 1 - (# compressed data point) / (# total data point)
+```
+Compute Max Error. For each original data point (x,y) and reconstructed data point (m,n)
+```
+Error = sqrt(power(x-m,2) + power(y-n,2))
+Max_Error = maximum `Error` between original and reconstructed data point.
 ```

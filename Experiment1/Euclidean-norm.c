@@ -1,14 +1,14 @@
 #include <stdio.h>
 
-#include "ltc-eu.h"
+#include "Euclidean-norm.h"
 
-#define EPSILON 100
+#define EPSILON (100)
 #define TIMEUNIT_DIFFERENT 1
 
-#include "local-data-2d.c"
-//#include "local-data-3d.c"
-//#include "local-mohamand-3d.c"
-//#include "local-mohamand-2d.c"
+#include "short-bicep-curl-2d.c"
+// #include "short-bicep-curl-3d.c"
+// #include "long-bicep-curl-2d.c"
+// #include "long-bicep-curl-3d.c"
 
 struct DATA_POINT base_data;
 struct DATA_POINT coming_data;
@@ -38,16 +38,9 @@ void updateCorCircle()
     corresponse_circle.radius = EPSILON/ln;
 }
 
-void transmitData() {
-    int i;
-    for (printf("%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
-        printf(",%f", base_data.data.coordinate[i]);
-    printf("\n");
-}
-
 int main()
 {
-    FILE * f_out = fopen("tmp.csv", "w");
+    FILE * f_out = fopen("compressed-euclidean.csv", "w");
     int data_index, i;
     for(data_index=0; data_index< data_list_length; data_index++)
     {
@@ -62,9 +55,9 @@ int main()
 
         updateCorCircle();
 
-        if(!isThereIntersection(&all_circles, corresponse_circle))
+        if(!isThereIntersection(&all_circles, corresponse_circle)||(coming_data.timestamp-base_data.timestamp)>200)
         {
-            //transmitData();
+
             for (fprintf(f_out, "%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
                 fprintf(f_out, ",%f", base_data.data.coordinate[i]);
             fprintf(f_out, "\n");
@@ -89,7 +82,6 @@ int main()
         }
     }
 
-    //transmitData();
     for (fprintf(f_out, "%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data.data.coordinate[i]);
     fprintf(f_out, "\n");
@@ -97,7 +89,8 @@ int main()
     double ln = coming_data.timestamp - base_data.timestamp;
     for (fprintf(f_out, "%u", coming_data.timestamp), i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln);
-	fprintf(f_out, "\n");
+	  fprintf(f_out, "\n");
+
+    free(all_circles.circles);
+    free(tmp_list_circles.circles);
 }
-
-
