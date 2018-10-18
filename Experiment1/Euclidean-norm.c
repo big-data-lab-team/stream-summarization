@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <sys/time.h>
 
 #include "Euclidean-norm.h"
 
@@ -90,6 +89,6 @@ int main()
     double ln = coming_data.timestamp - base_data.timestamp;
     for (fprintf(f_out, "%u", coming_data.timestamp), i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data.data.coordinate[i] + (centre_point.coordinate[i]-base_data.data.coordinate[i])*ln);
-	fprintf(f_out, "\n");
+	  fprintf(f_out, "\n");
 
 }
