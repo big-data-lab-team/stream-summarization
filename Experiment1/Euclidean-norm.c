@@ -75,7 +75,7 @@ int main()
             centre_point = corresponse_circle.centre;
         }
         else{
-            reInitialList(&all_ccirclesirclcircleses);
+            reInitialList(&all_circles);
             all_circles.length = tmp_list_circles.length;
             all_circles.circles = (struct CIRCLE *)malloc(sizeof(struct CIRCLE) * tmp_list_circles.length);
             for (i = 0;  i< tmp_list_circles.length; i++) {
