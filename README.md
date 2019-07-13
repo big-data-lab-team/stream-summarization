@@ -15,31 +15,31 @@ We provide 4 data files in C language, each of them is a array. You can change d
 ## Installation
 
 1. Clone the project:
-``` bash
+``` console
 $ git clone https://github.com/big-data-lab-team/stream-summarization.git
 ```
 
 2. Change directory
-``` bash
+``` console
 $ cd stream-summarization
 ```
 3. Compile the project
-``` bash
+``` console
 $ make
 ```
 
 ## Execution Example
 
 Run original `LTC` compression algorithm
-```bash
+```console
 ./ltc-original
 ```
 Run `LTC` with `Infinity norm`
-``` bash`
+``` console
 ./ltc-infinity
 ```
 Run `LTC` with `Euclidean norm`
-``` bash`
+``` console
 ./ltc-euclidean
 ```
 
@@ -48,19 +48,23 @@ This capture shows how to measure Compression Ratio and Max Error, that are ment
 
 This example uses `short-bicep-curl-2d` data Set.
 
+Note that the data points in this data set are sampling from accelerometer
+sensor, where the accelerometer's `range` is configured to be ±2g. The `error
+tolerance` equals `EPSILON * range / 2^15` in g.
+
 #### LTC with Infinity norm
 Select data set `short-bicep-curl-2d.c`, add in `Infinity-norm.c`
-```
+```c
 #include short-bicep-curl-2d.c
 ```
 Change `DIMENSION_WITHOUT_TIMESTAMP` macro to `2` in `Infinity-norm.c`, because we are using 2-dimensional data set.
-```
+```c
 #define DIMENSION_WITHOUT_TIMESTAMP 2
 ```
 Change `EPSILON` macro to the value you want in `Infinity-norm.c`.
-In this example we set `EPSILON = 100`
-```
-#define EPSILON 100
+In this example we set `EPSILON = 800`, corresponding to 48.8 mg.
+```c
+#define EPSILON 800
 ```
 Compile the method
 ```
@@ -86,17 +90,17 @@ Max_Error = maximum `Error` in data set.
 ```
 #### LTC with Euclidean norm
 Select data set `short-bicep-curl-2d.c`, add in `Euclidean-norm.c`
-```
+```c
 #include short-bicep-curl-2d.c
 ```
 Change `DIMENSION_WITHOUT_TIMESTAMP` macro to `2` in `Euclidean-norm.h`, because we are using 2-dimensional data set.
-```
+```c
 #define DIMENSION_WITHOUT_TIMESTAMP 2
 ```
 Change `EPSILON` macro to the value you want in `Euclidean-norm.c`.
-In this example we set `EPSILON = 100`
-```
-#define EPSILON 100
+In this example we set `EPSILON = 800`, corresponding to 48.8 mg.
+```c
+#define EPSILON 800
 ```
 Compile the method
 ```
@@ -119,4 +123,59 @@ Compute Max Error. For each original data point (x,y) and reconstructed data poi
 ```
 Error = sqrt(power(x-m,2) + power(y-n,2))
 Max_Error = maximum `Error` between original and reconstructed data point.
+```
+## Measure processing time
+Processing time is measured by gettimeofday() from the GNU C Library. You can
+just remove comments from `Infinity-norm.c` or `Euclidean-norm.c`.
+
+Note that please remove the code about writing, such as `fprintf`, in order to
+get accurate results.
+
+
+### Infinity norm
+In `Infinity-norm.c`, remove the comment in line 104
+```c
+gettimeofday(&tv1, NULL);
+```
+and the comments from line 137 to 140
+```c
+gettimeofday(&tv2, NULL);
+printf ("Total time = %f seconds\n",
+      (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+      (double) (tv2.tv_sec - tv1.tv_sec));
+```
+
+### Euclidean norm
+
+In `Euclidean-norm.c`, remove the comment in line 47
+```c
+gettimeofday(&tv1, NULL);
+```
+and the comments from line 87 to 90
+```c
+gettimeofday(&tv2, NULL);
+printf ("Total time = %f seconds\n",
+      (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+      (double) (tv2.tv_sec - tv1.tv_sec));
+```
+## Measure memory consumption
+We measured memory consumption using [Valgrind’s massif
+tool](http://valgrind.org/docs/manual/ms-manual.html)
+
+0. At first, install `valgrind`
+1. Compile programs, for example
+```
+$ make ltc-infinity
+```
+2. To gather profiling information by using `Massif`
+```bash
+valgrind --tool=massif ./ltc-infinity
+```
+3. Runing `ms_print` or `massif-visualizer` to see the information, for example
+```bash
+$ ms_print massif.out.<pid>
+```
+
+```bash
+$ massif-visualizer
 ```

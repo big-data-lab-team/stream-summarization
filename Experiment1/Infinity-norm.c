@@ -1,9 +1,10 @@
 #include <stdio.h> // printf
 #include <stdlib.h> //malloc
 #include <math.h> // sqrt()
+//#include <sys/time.h> //gettimeofday
 
 #define DIMENSION_WITHOUT_TIMESTAMP 2
-#define EPSILON (100)
+#define EPSILON (800)
 #define TIME_UNIT_DIFFERENCE 1
 
 #define MAX(x,y) (x)>=(y)?(x):(y);
@@ -100,7 +101,8 @@ int main()
     struct DATA_POINT *base_data = NULL;
     struct BOUND_BOX *bound_box = NULL;
 
-	int data_index, i;
+//  gettimeofday(&tv1, NULL);
+	  int data_index, i;
     for(data_index=0; data_index< data_list_length; data_index++)
     {
         *coming_data = data_list[data_index];
@@ -131,6 +133,11 @@ int main()
 
         updateBoundBox(bound_box, coming_data, base_data);
     }
+    
+//   gettimeofday(&tv2, NULL);
+//   printf ("Total time = %f seconds\n",
+//        (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+//        (double) (tv2.tv_sec - tv1.tv_sec));
 
     for(fprintf(f_out, "%u", base_data->timestamp), i=0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data->params[i]);
