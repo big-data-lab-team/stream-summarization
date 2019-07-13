@@ -6,40 +6,42 @@
 More detail, please read [Lightweight Temporal Compression of Microclimate Datasets](https://escholarship.org/uc/item/6zg2n1rh).
 You can find simple implementation in folder `LTC`
 
-4. `Infinity-norm.c` in folder `Experiment1` is a implementation of LTC with infinity norm. We provide 4 data files in C language, each one is a array. You can change dataset and modify 'DIMENSION_WITHOUT_TIMESTAMP' macro in C file with correct value before compiling it.
+2. `Infinity-norm.c` in folder `Experiment1` is a implementation of LTC with infinity norm. We provide 4 data files in C language, each one is a array. You can change dataset and modify `DIMENSION_WITHOUT_TIMESTAMP` macro in C file with correct value before compiling it.
 
-5. `Euclidean-norm.c` and `Euclidean-norm.h` in folder `Experiment1` is written to realize LTC with Euclidean norm. dataset which parameters are Interrelated.
+3. `Euclidean-norm.c` and `Euclidean-norm.h` in folder `Experiment1` is written to realize LTC with Euclidean norm. dataset which parameters are Interrelated.
 
-We provide 4 data files in C language, each of them is a array. You can change dataset and modify `DIMENSION_WITHOUT_TIMESTAMP` macro into correct value in C file before compiling it.
+We provide 4 data files in C language, each of them is a array. You can change
+dataset and modify `DIMENSION_WITHOUT_TIMESTAMP` macro into correct value in C
+file before compiling it.
 
 ## Installation
 
 1. Clone the project:
-``` console
+``` bash
 $ git clone https://github.com/big-data-lab-team/stream-summarization.git
 ```
 
 2. Change directory
-``` console
+``` bash
 $ cd stream-summarization
 ```
 3. Compile the project
-``` console
+``` bash
 $ make
 ```
 
 ## Execution Example
 
 Run original `LTC` compression algorithm
-```console
+```bash
 ./ltc-original
 ```
 Run `LTC` with `Infinity norm`
-``` console
+``` bash`
 ./ltc-infinity
 ```
 Run `LTC` with `Euclidean norm`
-``` console
+``` bash`
 ./ltc-euclidean
 ```
 
@@ -171,11 +173,11 @@ $ make ltc-infinity
 ```bash
 valgrind --tool=massif ./ltc-infinity
 ```
-3. Runing `ms_print` or `massif-visualizer` to see the information, for example
+3. Runing `ms_print` to see the information, where `<pid>` is the process ID.
 ```bash
 $ ms_print massif.out.<pid>
 ```
-
+or using `massif-visualizer`
 ```bash
-$ massif-visualizer
+$ massif-visualizer massif.out.<pid>
 ```
