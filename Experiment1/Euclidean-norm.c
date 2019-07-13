@@ -1,8 +1,9 @@
 #include <stdio.h>
+//#include <sys/time.h>
 
 #include "Euclidean-norm.h"
 
-#define EPSILON (100)
+#define EPSILON (800)
 #define TIMEUNIT_DIFFERENT 1
 
 #include "short-bicep-curl-2d.c"
@@ -42,6 +43,8 @@ int main()
 {
     FILE * f_out = fopen("compressed-euclidean.csv", "w");
     int data_index, i;
+    
+//    gettimeofday(&tv1, NULL);
     for(data_index=0; data_index< data_list_length; data_index++)
     {
         coming_data = data_list[data_index];
@@ -81,6 +84,10 @@ int main()
             }
         }
     }
+//    gettimeofday(&tv2, NULL);
+//    printf ("Total time = %f seconds\n",
+//         (double) (tv2.tv_usec - tv1.tv_usec) / 1000000 +
+//         (double) (tv2.tv_sec - tv1.tv_sec));
 
     for (fprintf(f_out, "%u", base_data.timestamp),i = 0; i<DIMENSION_WITHOUT_TIMESTAMP; i++)
         fprintf(f_out, ",%f", base_data.data.coordinate[i]);
